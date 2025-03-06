@@ -1,0 +1,42 @@
+@import url("//fonts.googleapis.com/css?family=Arimo");
+
+/* Odometer Car Theme Fixes */
+.odometer {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    display: inline-flex;
+    justify-content: center;
+    width: 150%;
+}
+
+/* Prevent number shifting inside the odometer container */
+.odometer .odometer-digit {
+    min-width: 1ch;
+    text-align: center;
+}
+
+/* Fix for digit container */
+.odometer .odometer-digit-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ensure the rolling effect is properly centered */
+.odometer .odometer-ribbon {
+    justify-content: center;
+    transition: transform 1s ease-in-out;
+}
+
+/* Ensure all digits occupy the same width */
+.odometer .odometer-value {
+    font-variant-numeric: tabular-nums;
+    font-family: monospace;
+    text-align: center;
+    min-width: unset;
+}
+
+/* Fix animation speed */
+.odometer.odometer-theme-car .odometer-ribbon-inner {
+    transition: transform 2s linear;
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Odometer Counter Example - Vertical Layout</title>
+  <!-- Load Odometer CSS from CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/odometer@0.4.8/themes/odometer-theme-default.css" />
+  <style>
+    /* Fixed vertical container centered on the page */
+    .container {
+      width: 675px;
+      height: 750px;
+      margin: 50px auto;
+      background: linear-gradient(to bottom, #FEE7D9, #FFFFFF);
+      position: relative;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      overflow: hidden;
+      padding-bottom: 150px; /* Extra space for CTA */
+    }
+    .top-bar {
+      width: 100%;
+      height: 100px;
+      background: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+    .logo {
+      width: 180px;
+      height: 80px;
+      object-fit: contain;
+    }
+    .counter-section {
+      text-align: center;
+      margin-top: 60px;
+    }
+    .label {
+      font-size: 34px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    /* Odometer styling */
+    .odometer {
+      display: inline-block;
+      font-size: 60px;
+      font-weight: 900;
+      vertical-align: middle;
+    }
+    .odometer.primary {
+      color: #EF5350;
+    }
+    .odometer.secondary {
+      color: #087984;
+    }
+    .child-image {
+      display: block;
+      width: 575px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin: 20px auto;
+    }
+    /* CTA Bar positioned at the bottom */
+    .cta-bar {
+      width: 100%;
+      height: 100px;
+      background: #087984;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+    /* QR Code inside the CTA Bar */
+    .cta-bar .qr {
+      margin-left: auto;
+      width: 80px;
+      height: 80px;
+      background: #fff;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #000;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Top Bar with Logo -->
+    <div class="top-bar">
+      <img src="logo.jpg" alt="Logo" class="logo">
+    </div>
+    <!-- First Counter Section -->
+    <div class="counter-section" id="firstCounterSection">
+      <div class="label">Lives Saved by RUTF since 2000:</div>
+      <!-- The first counter starts at 1,000,000 -->
+      <div class="odometer primary" id="odometer2000">1000000</div>
+    </div>
+    <!-- Child Image -->
+    <img src="child.jpg" alt="Child Eating RUTF" class="child-image">
+    <!-- Second Counter Section -->
+    <div class="counter-section" id="secondCounterSection" style="margin-top: 20px;">
+      <div class="label">Estimated Lives Saved by RUTF by 2035:</div>
+      <!-- The second counter starts at 55,000,000 -->
+      <div class="odometer secondary" id="odometer2035">55000000</div>
+    </div>
+    <!-- CTA Bar with QR Code -->
+    <div class="cta-bar">
+      Help us increase this number!
+      <div class="qr">QR</div>
+    </div>
+  </div>
+  
+  <!-- Load Odometer JS Library from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/odometer@0.4.8/odometer.min.js"></script>
+  <script>
+    // Set odometer options to animate each change over 1000 ms (1 second)
+    window.odometerOptions = {
+      duration: 1000,
+      format: '(,ddd)'
+    };
+
+    // First counter: increments by 1 every second from 1,000,000 to 55,000,000.
+    function runFirstCounter() {
+      const firstElem = document.getElementById("odometer2000");
+      let firstVal = 1000000;
+      const firstTarget = 55000000;
+      firstElem.innerHTML = firstVal;
+      const firstInterval = setInterval(() => {
+        firstVal++;
+        if (firstVal >= firstTarget) {
+          firstVal = firstTarget;
+          firstElem.innerHTML = firstVal;
+          clearInterval(firstInterval);
+        } else {
+          firstElem.innerHTML = firstVal;
+        }
+      }, 1000);
+    }
+
+    // Second counter: increments by 1 every second from 55,000,000 to 127,000,000.
+    function runSecondCounter() {
+      const secondElem = document.getElementById("odometer2035");
+      let secondVal = 55000000;
+      const secondTarget = 127000000;
+      secondElem.innerHTML = secondVal;
+      const secondInterval = setInterval(() => {
+        secondVal++;
+        if (secondVal >= secondTarget) {
+          secondVal = secondTarget;
+          secondElem.innerHTML = secondVal;
+          clearInterval(secondInterval);
+        } else {
+          secondElem.innerHTML = secondVal;
+        }
+      }, 1000);
+    }
+
+    // Start both counters simultaneously.
+    runFirstCounter();
+    runSecondCounter();
+  </script>
+</body>
+</html>
